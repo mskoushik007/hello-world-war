@@ -4,7 +4,7 @@
 </head>
 <body>
 	<h1>topics covered till date!</h1>
-	<h2>1.linux</h2>
+	<h2>1.linux......</h2>
 	<h2>2.shell scripting</h2>
 	<h2>3.github</h2>
 	<h2>4.maven</h2>

@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>hello this is koushik here....!</title>
+<title>hello this is koushik.....</title>
 </head>
 <body>
 	<h1>topics covered till date!</h1>

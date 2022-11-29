@@ -1,5 +1,5 @@
 pipeline {
-  agent {label 'koushik'}
+  agent {label 'deploynode'}
   stages {
     stage ('my build') {
       steps {

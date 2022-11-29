@@ -1,5 +1,5 @@
 pipeline {
-  agent {label 'thirdnode'}
+  agent {label 'build-slave'}
   stages {
     stage ('my build') {
       steps {

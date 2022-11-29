@@ -1,14 +1,16 @@
 pipeline {
-  agent {label 'deploynode'}
+  agent {label 'build-slave'}
   stages {
     stage ('my build') {
-      steps {
+     steps {
         sh 'mvn package'
         sh 'pwd'
         sh 'ls'
       }
     }
+    
     stage ('my deploy') {
+     agent {label 'deploynode'} 
       steps {
         sh 'sudo cp -R target/hello-world-war-1.0.0.war /opt/tomcat/webapps'
         sh 'sudo sh /opt/tomcat/bin/shutdown.sh'

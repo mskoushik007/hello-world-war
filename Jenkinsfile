@@ -4,6 +4,7 @@ pipeline {
     stage ('my build') {
      steps {
         sh 'mvn package'
+        sh 'sudo scp -R target/hello-world-war-1.0.0.war koushik@172.31.3.80:/opt/tomcat/webapps'
         sh 'pwd'
         sh 'ls'
       }
@@ -12,7 +13,6 @@ pipeline {
     stage ('my deploy') {
      agent {label 'deploynode'} 
       steps {
-        sh 'sudo cp -R target/hello-world-war-1.0.0.war /opt/tomcat/webapps'
         sh 'sudo sh /opt/tomcat/bin/shutdown.sh'
         sh 'sleep 3'
         sh 'sudo sh /opt/tomcat/bin/startup.sh'

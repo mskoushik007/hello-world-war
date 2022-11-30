@@ -16,9 +16,9 @@ pipeline {
       steps {
         sh 'pwd'
         sh 'whoami'
-        sh 'sh /opt/tomcat/bin/shutdown.sh'
+        sh 'sudo sh /opt/tomcat/bin/shutdown.sh'
         sh 'sleep 3'
-        sh 'sh /opt/tomcat/bin/startup.sh'
+        sh 'sudo sh /opt/tomcat/bin/startup.sh'
         sh 'ls'
       }
     }

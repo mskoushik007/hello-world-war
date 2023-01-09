@@ -1,26 +1,27 @@
 pipeline {
-  agent {label 'build-slave'}
+  agent {label 'dockerbuildnode'}
   stages {
     stage ('my build') {
-     steps {
-        sh 'mvn package'
-        sh 'whoami'
-        sh 'scp -R target/hello-world-war-1.0.0.war koushik@172.31.3.80:/opt/tomcat/webapps'
-        sh 'pwd'
-        sh 'ls'
-      }
-    }
-    
-    stage ('my deploy') {
-     agent {label 'deploynode'} 
       steps {
-        sh 'pwd'
-        sh 'whoami'
-        sh 'sudo sh /opt/tomcat/bin/shutdown.sh'
-        sh 'sleep 3'
-        sh 'sudo sh /opt/tomcat/bin/startup.sh'
-        sh 'ls'
+        sh "echo ${BUILD_VERSION}"
+        sh "docker build -t mytomcat ."
       }
     }
+    stage ('publish stage') {
+      steps {
+        sh "echo ${BUILD_VERSION}"
+        sh 'docker login -u mskoushik007 -p 4ad14me411'
+        sh 'docker tag mytomcat mskoushik007/tomcat:latest'
+        sh 'docker push mskoushik007/tomcat:latest'
+      }
+    }
+    stage ('my deploy') {
+      agent {label 'dockerdeploynode'}
+      steps {
+        sh 'docker pull mskoushik007/tomcat:latest'
+        sh 'docker rm -f mytomcat'
+        sh 'docker run -d -p 9090:8080 --name mscontainer mskoushik007/tomcat:latest'
+      }
+    } 
   }
 }

@@ -1,5 +1,5 @@
 pipeline {
-  agent {label 'dockerbuildnode'}
+  agent {label 'koushik'}
   stages {
     stage ('my build') {
       steps {
@@ -21,7 +21,7 @@ pipeline {
       }
     }
     stage ('my deploy') {
-      agent {label 'dockerdeploynode'}
+      agent {label 'ms'}
       steps {
         sh 'helm repo add helm https://helmjfrog.jfrog.io/artifactory/api/helm/helm --username mskoushikshivanna@gmail.com --password 4AD14me411@'
         sh 'helm repo update'
